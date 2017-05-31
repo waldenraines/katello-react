@@ -1,16 +1,16 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // TODO: remove jquery dependency (currently only react-bootstrap-select uses it).
 const JQueryWindowPlugin = new webpack.ProvidePlugin({
   $: 'jquery',
-  jQuery: 'jquery',
+  jQuery: 'jquery'
 });
 
-const ExtractTextPluginConfig = new ExtractTextPlugin("styles.css");
+const ExtractTextPluginConfig = new ExtractTextPlugin('styles.css');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './public/index.html',
@@ -28,30 +28,29 @@ module.exports = {
   plugins: [
     JQueryWindowPlugin, ExtractTextPluginConfig, HtmlWebpackPluginConfig
   ],
-
   module: {
-    rules:[
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015', 'react']
+            presets: ['stage-2', 'react']
           }
         }
       },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
+          fallback: 'style-loader',
+          use: 'css-loader'
         })
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
         use: {
-          loader: "url-loader",
+          loader: 'url-loader',
           options: {
             limit: 10000,
             mimetype: 'application/font-woff'
@@ -61,7 +60,7 @@ module.exports = {
       {
         test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
         use: {
-          loader: "url-loader",
+          loader: 'url-loader',
           options: {
             limit: 10000,
             mimetype: 'application/font-woff2'
@@ -71,7 +70,7 @@ module.exports = {
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         use: {
-          loader: "url-loader",
+          loader: 'url-loader',
           options: {
             limit: 10000,
             mimetype: 'application/octet-stream'
@@ -81,7 +80,7 @@ module.exports = {
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
         use: {
-          loader: "file-loader"
+          loader: 'file-loader'
         }
       },
       {

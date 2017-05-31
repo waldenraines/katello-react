@@ -1,28 +1,16 @@
-require('bootstrap-select');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {FormControl} from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap';
+
+require('bootstrap-select');
 
 class BootstrapSelect extends React.Component {
-  componentDidUpdate () {
-    this.select.selectpicker('refresh');
-    this.container.toggleClass('open', this.state.open);
-  }
-
-  componentWillUnmount () {
-    this.body.off('click');
-    this.button.off('click');
-    this.items.off('click');
-    this.select.selectpicker('destroy');
-  }
-
-  componentWillMount () {
+  componentWillMount() {
     this.setState({ open: false });
   }
 
-  componentDidMount () {
-    var self = this;
+  componentDidMount() {
+    const self = this;
 
     this.body = $('body');
     this.select = $(ReactDOM.findDOMNode(this));
@@ -32,26 +20,38 @@ class BootstrapSelect extends React.Component {
     this.button = this.container.find('button');
     this.items = this.container.find('ul.dropdown-menu li a');
 
-    this.body.click(function () {
+    this.body.click(() => {
       self.setState({ open: false });
     });
 
-    this.button.click(function (e) {
+    this.button.click((e) => {
       e.stopPropagation();
       self.setState({ open: !self.state.open });
     });
 
-    this.items.click(function () {
+    this.items.click(() => {
       if (self.props.multiple) return;
       self.setState({ open: !self.state.open });
     });
   }
 
-  render () {
+  componentDidUpdate() {
+    this.select.selectpicker('refresh');
+    this.container.toggleClass('open', this.state.open);
+  }
+
+  componentWillUnmount() {
+    this.body.off('click');
+    this.button.off('click');
+    this.items.off('click');
+    this.select.selectpicker('destroy');
+  }
+
+  render() {
     return (
       <FormControl {...this.props} componentClass="select" />
     );
   }
 }
 
-module.exports = BootstrapSelect;
+export default BootstrapSelect;
