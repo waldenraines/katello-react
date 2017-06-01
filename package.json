@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.1",
+    "bootstrap-select": "^1.12.2",
+    "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "patternfly": "^3.25.0",
     "prop-types": "^15.5.10",

@@ -1,7 +1,14 @@
+const webpack = require('webpack');
 const path = require('path');
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// TODO: remove jquery dependency (currently only react-bootstrap-select uses it).
+const JQueryWindowPlugin = new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery',
+});
 
 const ExtractTextPluginConfig = new ExtractTextPlugin("styles.css");
 
@@ -18,47 +25,64 @@ module.exports = {
     path: path.resolve('dist'),
     filename: 'index_bundle.js'
   },
+  plugins: [
+    JQueryWindowPlugin, ExtractTextPluginConfig, HtmlWebpackPluginConfig
+  ],
+
   module: {
-    loaders: [
+    rules:[
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'react']
+          }
         }
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url-loader",
-        options: {
-          limit: 10000,
-          mimetype: 'application/font-woff'
+        use: {
+          loader: "url-loader",
+          options: {
+            limit: 10000,
+            mimetype: 'application/font-woff'
+          }
         }
       },
       {
         test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url-loader",
-        options: {
-          limit: 10000,
-          mimetype: 'application/font-woff2'
+        use: {
+          loader: "url-loader",
+          options: {
+            limit: 10000,
+            mimetype: 'application/font-woff2'
+          }
         }
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url-loader",
-        options: {
-          limit: 10000,
-          mimetype: 'application/octet-stream'
+        use: {
+          loader: "url-loader",
+          options: {
+            limit: 10000,
+            mimetype: 'application/octet-stream'
+          }
         }
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file-loader"
+        use: {
+          loader: "file-loader"
+        }
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -76,19 +100,16 @@ module.exports = {
             options: {
               bypassOnDebug: true,
               optipng: {
-                optimizationLevel: 7,
+                optimizationLevel: 7
               },
               gifsicle: {
-                interlaced: false,
-              },
+                interlaced: false
+              }
             }
-
           }
         ]
       }
     ]
-  },
-
-  plugins: [ExtractTextPluginConfig, HtmlWebpackPluginConfig]
+  }
 };
 
