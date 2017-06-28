@@ -1,42 +1,64 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { ListViewItem, ListViewItemContainer, ListViewItemExpansion } from '../../patternfly-react/';
+import { ListViewExpandableItem, ListViewItem } from 'patternfly-react';
 
-class RedHatRepositorySet extends React.Component {
-  static defaultProps = {
-    redhatRepositorySetName: '',
-    redhatRepositories: []
+const RedHatRepositorySet = ({ redHatRepositorySet }) => {
+  const renderRepositoryList = () => (
+    redHatRepositorySet.repositories.map(redHatRepository =>
+      <ListViewItem key={redHatRepository.id} heading={redHatRepository.arch} />
+    )
+  );
+
+  // TODO: combine this and the one in RedHatRepository
+  const getTypeIcon = (type) => {
+    let className = '';
+
+    switch (type) {
+      case 'rpm':
+        className = 'pficon-bundle';
+        break;
+      case 'source_rpm':
+        className = 'fa fa-code';
+        break;
+      case 'debug':
+        className = 'fa fa-bug';
+        break;
+      case 'iso':
+        className = 'fa fa-file-image-o';
+        break;
+      case 'beta':
+        className = 'fa fa-bold';
+        break;
+      case 'kickstart':
+        className = 'fa fa-futbol-o';
+        break;
+      default:
+        className = 'fa fa-question';
+        break;
+    }
+    return cx('fa-2x', className);
   };
 
-  static propTypes = {
-    redhatRepositorySet: PropTypes.object.isRequired
-  };
+  return (
+    <ListViewExpandableItem
+      additionalListClass="list-view-pf-stacked"
+      key={redHatRepositorySet.id}
+      heading={redHatRepositorySet.name}
+      itemText={redHatRepositorySet.label}
+      expansion={renderRepositoryList()}
+      actions={redHatRepositorySet.type}
+      iconClass={getTypeIcon(redHatRepositorySet.type)}
+    />);
+};
 
-  componentWillMount() {
-    this.setState({ expanded: false });
-  }
+RedHatRepositorySet.propTypes = {
+  redHatRepositorySet: PropTypes.object
+};
 
-  listItemClick() {
-    this.setState({ expanded: !this.state.expanded });
-  }
-
-  render() {
-    return (
-      <ListViewItem isActive={this.state.expanded}>
-        <ListViewItemContainer
-          isExpansionItem
-          itemClicked={e => this.listItemClick(e)}
-          isActive={this.state.expanded}
-        >
-          {this.props.redhatRepositorySet.name}
-        </ListViewItemContainer>
-        <ListViewItemExpansion isActive={this.state.expanded}>
-
-        </ListViewItemExpansion>
-      </ListViewItem>
-    );
-  }
-}
+RedHatRepositorySet.defaultProps = {
+  redHatRepositorySet: ''
+};
 
 export default RedHatRepositorySet;

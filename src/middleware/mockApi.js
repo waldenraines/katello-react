@@ -1,8 +1,8 @@
 import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/no-extraneous-dependencies
 import { enabledRedHatRepositoriesIndexResponse, disabledRedHatRepositoriesIndexResponse } from './mockResponses';
 
-export default function initializeMockAPI(client) {
-  const mock = new MockAdapter(client, { delayResponse: 1000 });
+export default function initializeMockAPI(client, options) {
+  const mock = new MockAdapter(client, options);
 
   mock.onGet().reply((config) => {
     // List enabled Red Hat repositories

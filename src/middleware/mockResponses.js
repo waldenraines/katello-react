@@ -1,51 +1,56 @@
 export const enabledRedHatRepositoriesIndexResponse = {
-  "total": 5,
-  "subtotal": 5,
-  "page": null,
-  "per_page": null,
-  "error": null,
-  "search": null,
-  "sort": {
-    "by": null,
-    "order": null
+  total: 5,
+  subtotal: 5,
+  page: null,
+  per_page: null,
+  error: null,
+  search: null,
+  sort: {
+    by: null,
+    order: null
   },
-  "results": [{
-    "id": "3029",
-    "arch": 'i386',
-    "type": "rpm",
-    "version": "6.2",
-    "name": "Red Hat Ceph Storage Installer 1.2 for Red Hat Enterprise Linux 6 Server",
-    "label": "ceph-storage-installer"
+  results: [{
+    id: '3029',
+    arch: 'i386',
+    enabled: true,
+    type: 'rpm',
+    version: '6.2',
+    name: 'Red Hat Ceph Storage Installer 1.2 for Red Hat Enterprise Linux 6 Server',
+    label: 'ceph-storage-installer'
   }, {
-    "type": "source_rpm",
-    "arch": 'x86_64',
-    "version": "7.3",
-    "id": "1401",
-    "name": "Red Hat Enterprise Linux 7 Server (Source RPMs)",
-    "label": "rhel-7-server-beta-source-rpms"
+    type: 'source_rpm',
+    arch: 'x86_64',
+    enabled: true,
+    version: '7.3',
+    id: '1401',
+    name: 'Red Hat Enterprise Linux 7 Server (Source RPMs)',
+    label: 'rhel-7-server-beta-source-rpms'
   }, {
-    "type": "iso",
-    "arch": 'x86_64',
-    "version": "6.0.12",
-    "contentUrl": "/content/dist/rhel/server/6/6Server/$basearch/satellite/6.0/os",
-    "id": "4922",
-    "name": "Red Hat Satellite 6.0 for RHEL 7 Server",
-    "label": "rhel-6-server-satellite"
+    type: 'iso',
+    arch: 'x86_64',
+    enabled: true,
+    version: '6.0.12',
+    contentUrl: '/content/dist/rhel/server/6/6Server/$basearch/satellite/6.0/os',
+    id: '4922',
+    name: 'Red Hat Satellite 6.0 for RHEL 7 Server',
+    label: 'rhel-6-server-satellite'
   }, {
-    "type": "beta",
-    "arch": 'x86_64',
-    "version": null,
-    "contentUrl": "/content/dist/rhel/server/7/$releasever/$basearch/ceph-tools/2/debug",
-    "id": "4923",
-    "name": "Red Hat Virtualization Host",
-    "label": "red-hat-virtualization-host"
+    type: 'beta',
+    arch: 'x86_64',
+    enabled: true,
+    version: null,
+    contentUrl: '/content/dist/rhel/server/7/$releasever/$basearch/ceph-tools/2/debug',
+    id: '4923',
+    name: 'Red Hat Virtualization Host',
+    label: 'red-hat-virtualization-host'
   }, {
-    "type": "kickstart",
-    "arch": 'x86_64',
-    "version": "7.1",
-    "id": "1403",
-    "name": "Red Hat Enterprise Linux 7 Server",
-    "label": "rhel-7-server-beta-kickstart"
+    type: 'kickstart',
+    arch: 'x86_64',
+    enabled: true,
+    version: '7.1',
+    id: '1403',
+    name: 'Red Hat Enterprise Linux 7 Server',
+    label: 'rhel-7-server-beta-kickstart'
   }]
 };
 
@@ -61,8 +66,19 @@ export const disabledRedHatRepositoriesIndexResponse = {
     order: null
   },
   results: [{
-    repositories: [],
-    type: 'yum',
+    repositories: [
+      {
+        id: 343,
+        arch: 'x86_64',
+        version: "5.10"
+      },
+      {
+        id: 253,
+        arch: 'ia64',
+        version: "5.10"
+      }
+    ],
+    type: 'rpm',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/beta/rhel/server/5/$releasever/$basearch/rhv-agent/4/os',
@@ -71,7 +87,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-5-server-rhv-4-agent-beta-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'debug',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/beta/rhel/server/5/$releasever/$basearch/rhv-agent/4/debug',
@@ -80,7 +96,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-5-server-rhv-4-agent-beta-debug-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'source',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/beta/rhel/server/5/$releasever/$basearch/rhv-agent/4/source/SRPMS',
@@ -89,7 +105,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-5-server-rhv-4-agent-beta-source-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'source',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/dist/rhel/server/7/$releasever/$basearch/openstack-tools/8/source/SRPMS',
@@ -98,7 +114,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-7-server-openstack-8-tools-source-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'rpm',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/dist/rhel/server/6/$releasever/$basearch/rhev-agent/3/os',
@@ -107,7 +123,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-6-server-rhev-agent-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'debug',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/dist/rhel/server/6/$releasever/$basearch/rhev-agent/3/debug',
@@ -116,7 +132,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-6-server-rhev-agent-debug-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'source',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/beta/rhel/server/7/$basearch/rh-common/source/SRPMS',
@@ -125,7 +141,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-7-server-rh-common-beta-source-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'source',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/beta/rhel/server/6/$releasever/$basearch/rhev-agent/3/source/SRPMS',
@@ -134,7 +150,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-6-server-rhev-agent-beta-source-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'rpm',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/beta/rhel/server/7/$basearch/rh-common/os',
@@ -143,7 +159,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-7-server-rh-common-beta-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'rpm',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/beta/rhel/server/6/$releasever/$basearch/rhev-agent/3/os',
@@ -152,7 +168,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-6-server-rhev-agent-beta-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'debug',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/beta/rhel/server/7/$basearch/rh-common/debug',
@@ -161,7 +177,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-7-server-rh-common-beta-debug-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'debug',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/beta/rhel/server/6/$releasever/$basearch/rhev-agent/3/debug',
@@ -170,7 +186,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-6-server-rhev-agent-beta-debug-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'source',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/beta/rhel/server/6/$releasever/$basearch/rhv-agent/4/source/SRPMS',
@@ -179,7 +195,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-6-server-rhv-4-agent-beta-source-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'rpm',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/dist/rhel/server/7/$releasever/$basearch/openstack-tools/8/os',
@@ -188,7 +204,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-7-server-openstack-8-tools-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'rpm',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/fastrack/rhel/server/5/$basearch/os',
@@ -197,7 +213,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-5-server-fastrack-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'debug',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/dist/rhel/server/7/$releasever/$basearch/openstack-tools/8/debug',
@@ -206,7 +222,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-7-server-openstack-8-tools-debug-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'rpm',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/dist/rhel/server/6/6Server/$basearch/sat-tools/6.1/os',
@@ -215,7 +231,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-6-server-satellite-tools-6.1-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'debug',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/dist/rhel/server/6/6Server/$basearch/sat-tools/6.1/debug',
@@ -224,7 +240,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-6-server-satellite-tools-6.1-debug-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'source',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/dist/rhel/server/6/6Server/$basearch/sat-tools/6.1/source/SRPMS',
@@ -233,7 +249,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-6-server-satellite-tools-6.1-source-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'rpm',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/dist/rhel/server/7/7Server/$basearch/sat-tools/6.1/os',
@@ -242,7 +258,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-7-server-satellite-tools-6.1-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'debug',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/dist/rhel/server/7/7Server/$basearch/sat-tools/6.1/debug',
@@ -251,7 +267,7 @@ export const disabledRedHatRepositoriesIndexResponse = {
     label: 'rhel-7-server-satellite-tools-6.1-debug-rpms'
   }, {
     repositories: [],
-    type: 'yum',
+    type: 'rpm  ',
     vendor: null,
     gpgUrl: null,
     contentUrl: '/content/fastrack/rhel/server/6/$basearch/os',

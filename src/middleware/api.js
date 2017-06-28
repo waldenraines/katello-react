@@ -7,7 +7,7 @@ const API_ROOT = 'http://localhost/katello/api/v2/';
 
 // Initialize a mock API, TODO: replace with actual API calls
 import initializeMockAPI from './mockApi'; // eslint-disable-line import/first, import/newline-after-import
-initializeMockAPI(axios);
+initializeMockAPI(axios, { delayResponse: 2000 });
 
 const apiGetRequest = (endpoint) => {
   const config = {
